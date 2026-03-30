@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Data</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+        .container {
+            width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+
+<body ng-controller="empController">
+
+<div class="container">
+    <h2>Employee Details</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+        </tr>
+
+        <tr ng-repeat="emp in employees">
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.position}}</td>
+            <td>{{emp.salary}}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+var app = angular.module("employeeApp", []);
+
+app.controller("empController", function ($scope, $http) {
+
+    $http.get("data.json").then(function (response) {
+        $scope.employees = response.data;
+    }, function (error) {
+        alert("Error loading data");
+    });
+
+});
+</script>
+
+</body>
+</html>

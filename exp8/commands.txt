@@ -1,0 +1,29 @@
+// Use Database
+use studentDB
+
+// Insert Documents
+db.students.insertMany([
+  { name: "Alice", age: 23, score: 85 },
+  { name: "Bob", age: 25, score: 90 },
+  { name: "Charlie", age: 22, score: 88 },
+  { name: "David", age: 24, score: 92 },
+  { name: "Eve", age: 21, score: 95 }
+]);
+
+// 1. Count Documents
+db.students.countDocuments({});
+
+// 2. Limit Documents
+db.students.find().limit(3);
+
+// 3. Sort Documents (Ascending by age)
+db.students.find().sort({ age: 1 });
+
+// 4. Sort Documents (Descending by score)
+db.students.find().sort({ score: -1 });
+
+// 5. Skip Documents
+db.students.find().skip(2);
+
+// 6. Combined Operations (Sort + Skip + Limit)
+db.students.find().sort({ score: -1 }).skip(2).limit(3);

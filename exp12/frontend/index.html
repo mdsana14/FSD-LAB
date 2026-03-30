@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Link JS -->
+    <script src="app.js"></script>
+
+    <!-- Styling -->
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        form {
+            margin: 20px auto;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 60%;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+</head>
+
+<body ng-controller="StudentController">
+
+    <h1>Student Information Management</h1>
+
+    <!-- Form -->
+    <form ng-submit="addStudent()">
+        <input type="text" ng-model="newStudent.name" placeholder="Name" required>
+        <input type="text" ng-model="newStudent.studentId" placeholder="Student ID" required>
+        <input type="text" ng-model="newStudent.grade" placeholder="Grade" required>
+        <button type="submit">Add Student</button>
+    </form>
+
+    <!-- Table -->
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Grade</th>
+        </tr>
+
+        <tr ng-repeat="student in students">
+            <td>{{ student.name }}</td>
+            <td>{{ student.studentId }}</td>
+            <td>{{ student.grade }}</td>
+        </tr>
+    </table>
+
+</body>
+</html>

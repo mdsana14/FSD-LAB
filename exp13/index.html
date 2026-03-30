@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+
+    <!-- React CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Styling -->
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #5ff7ff, #feb47b);
+        }
+
+        h1 {
+            color: white;
+        }
+
+        .calculator {
+            margin: 50px auto;
+            width: 260px;
+            padding: 20px;
+            background: #222;
+            border-radius: 15px;
+            box-shadow: 0 0 15px black;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+            text-align: right;
+            font-size: 20px;
+            border: none;
+            padding: 5px;
+        }
+
+        button {
+            width: 55px;
+            height: 55px;
+            margin: 5px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .num { background: #4CAF50; color: white; }
+        .op { background: #ca5d26; color: white; }
+        .eq { background: #2196F3; color: white; }
+        .clr { background: #f44336; color: white; }
+    </style>
+</head>
+
+<body>
+
+<h1>Calculator</h1>
+
+<div id="root"></div>
+
+<!-- React Code -->
+<script type="text/babel">
+
+function Calculator() {
+    const [input, setInput] = React.useState("");
+
+    const handleClick = (value) => {
+        setInput(input + value);
+    };
+
+    const calculate = () => {
+        try {
+            setInput(eval(input));
+        } catch {
+            setInput("Error");
+        }
+    };
+
+    const clear = () => {
+        setInput("");
+    };
+
+    return (
+        <div className="calculator">
+            <input value={input} readOnly />
+
+            <div>
+                <button className="num" onClick={() => handleClick('1')}>1</button>
+                <button className="num" onClick={() => handleClick('2')}>2</button>
+                <button className="num" onClick={() => handleClick('3')}>3</button>
+                <button className="op" onClick={() => handleClick('+')}>+</button>
+            </div>
+
+            <div>
+                <button className="num" onClick={() => handleClick('4')}>4</button>
+                <button className="num" onClick={() => handleClick('5')}>5</button>
+                <button className="num" onClick={() => handleClick('6')}>6</button>
+                <button className="op" onClick={() => handleClick('-')}>-</button>
+            </div>
+
+            <div>
+                <button className="num" onClick={() => handleClick('7')}>7</button>
+                <button className="num" onClick={() => handleClick('8')}>8</button>
+                <button className="num" onClick={() => handleClick('9')}>9</button>
+                <button className="op" onClick={() => handleClick('*')}>*</button>
+            </div>
+
+            <div>
+                <button className="clr" onClick={clear}>C</button>
+                <button className="num" onClick={() => handleClick('0')}>0</button>
+                <button className="eq" onClick={calculate}>=</button>
+                <button className="op" onClick={() => handleClick('/')}>/</button>
+            </div>
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Calculator />);
+
+</script>
+
+</body>
+</html>

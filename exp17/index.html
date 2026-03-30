@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+
+    <!-- React 17 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- React Router -->
+    <script src="https://unpkg.com/react-router-dom@5/umd/react-router-dom.min.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #eb947f, #feb47b);
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background: black;
+            color: white;
+            border: none;
+        }
+
+        nav a {
+            margin: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .box {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Online Store</h1>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const { HashRouter, Route, Link, Switch } = ReactRouterDOM;
+
+// Register Component
+function Register() {
+    return (
+        <div className="box">
+            <h2>Register</h2>
+            <input placeholder="Username" /><br/>
+            <input type="password" placeholder="Password" /><br/>
+            <button>Register</button>
+        </div>
+    );
+}
+
+// Login Component
+function Login() {
+    return (
+        <div className="box">
+            <h2>Login</h2>
+            <input placeholder="Username" /><br/>
+            <input type="password" placeholder="Password" /><br/>
+            <button>Login</button>
+        </div>
+    );
+}
+
+// Products Component
+function Products() {
+    const items = ["Shoes", "Watch", "Bag"];
+
+    return (
+        <div className="box">
+            <h2>Products</h2>
+            {items.map((item, index) => (
+                <p key={index}>🛒 {item}</p>
+            ))}
+        </div>
+    );
+}
+
+// App
+function App() {
+    return (
+        <HashRouter>
+            <nav>
+                <Link to="/">Register</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/products">Products</Link>
+            </nav>
+
+            <Switch>
+                <Route exact path="/" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/products" component={Products} />
+            </Switch>
+        </HashRouter>
+    );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+</script>
+
+</body>
+</html>

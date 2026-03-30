@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Store</title>
+
+    <!-- React 17 (IMPORTANT) -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- React Router v5 -->
+    <script src="https://unpkg.com/react-router-dom@5/umd/react-router-dom.min.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #9f6ccc, #a37cf2);
+            color: white;
+        }
+
+        nav a {
+            margin: 10px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .box {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Music Store</h1>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const { HashRouter, Route, Link, Switch } = ReactRouterDOM;
+
+// Components
+function Home() {
+    return <div className="box"><h2>Welcome to Music Store 🎵</h2></div>;
+}
+
+function Songs() {
+    const songs = ["Shape of You", "Blinding Lights", "Perfect"];
+
+    return (
+        <div className="box">
+            <h2>Available Songs</h2>
+            {songs.map((song, index) => (
+                <p key={index}>🎵 {song}</p>
+            ))}
+        </div>
+    );
+}
+
+function Albums() {
+    const albums = ["Album A", "Album B", "Album C"];
+
+    return (
+        <div className="box">
+            <h2>Albums</h2>
+            {albums.map((album, index) => (
+                <p key={index}>💿 {album}</p>
+            ))}
+        </div>
+    );
+}
+
+// App
+function App() {
+    return (
+        <HashRouter>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/songs">Songs</Link>
+                <Link to="/albums">Albums</Link>
+            </nav>
+
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/songs" component={Songs} />
+                <Route path="/albums" component={Albums} />
+            </Switch>
+        </HashRouter>
+    );
+}
+
+// IMPORTANT (React 17 syntax)
+ReactDOM.render(<App />, document.getElementById("root"));
+
+</script>
+
+</body>
+</html>

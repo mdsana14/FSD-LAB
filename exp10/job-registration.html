@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jobApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Registration Form</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        .container {
+            width: 450px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+        }
+        button:disabled {
+            background: #aaa;
+        }
+    </style>
+</head>
+
+<body ng-controller="jobController">
+
+<div class="container">
+    <h2>Job Registration Form</h2>
+
+    <form name="jobForm" novalidate ng-submit="submitForm()">
+
+        <!-- Name -->
+        <label>Full Name</label>
+        <input type="text" name="name" ng-model="user.name" required>
+        <div class="error" ng-show="jobForm.name.$touched && jobForm.name.$invalid">
+            Name is required.
+        </div>
+
+        <!-- Email -->
+        <label>Email</label>
+        <input type="email" name="email" ng-model="user.email" required>
+        <div class="error" ng-show="jobForm.email.$touched && jobForm.email.$invalid">
+            Enter a valid email.
+        </div>
+
+        <!-- Phone -->
+        <label>Phone Number</label>
+        <input type="text" name="phone" ng-model="user.phone"
+               ng-pattern="/^[0-9]{10}$/"
+               required>
+        <div class="error" ng-show="jobForm.phone.$touched && jobForm.phone.$invalid">
+            Enter 10-digit phone number.
+        </div>
+
+        <!-- Gender -->
+        <label>Gender</label>
+        <select name="gender" ng-model="user.gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <div class="error" ng-show="jobForm.gender.$touched && jobForm.gender.$invalid">
+            Gender is required.
+        </div>
+
+        <!-- Job Role -->
+        <label>Job Role</label>
+        <input type="text" name="role" ng-model="user.role" required>
+        <div class="error" ng-show="jobForm.role.$touched && jobForm.role.$invalid">
+            Job role is required.
+        </div>
+
+        <!-- Password -->
+        <label>Password</label>
+        <input type="password" name="password" ng-model="user.password"
+               ng-minlength="6" required>
+        <div class="error" ng-show="jobForm.password.$touched && jobForm.password.$invalid">
+            Password must be at least 6 characters.
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" ng-disabled="jobForm.$invalid">
+            Register
+        </button>
+
+    </form>
+</div>
+
+<script>
+var app = angular.module("jobApp", []);
+
+app.controller("jobController", function ($scope) {
+    $scope.user = {};
+
+    $scope.submitForm = function () {
+        if ($scope.jobForm.$valid) {
+            alert("Job Registration Successful!");
+        }
+    };
+});
+</script>
+
+</body>
+</html>

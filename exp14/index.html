@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Voting App</title>
+
+    <!-- React CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: white;
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn1 { background: #4CAF50; color: white; }
+        .btn2 { background: #ff5722; color: white; }
+    </style>
+</head>
+
+<body>
+
+<h1>Voting Application</h1>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function VotingApp() {
+    const [candidate1, setCandidate1] = React.useState(0);
+    const [candidate2, setCandidate2] = React.useState(0);
+
+    return (
+        <div className="box">
+            <h2>Candidate A Votes: {candidate1}</h2>
+            <button className="btn1" onClick={() => setCandidate1(candidate1 + 1)}>
+                Vote A
+            </button>
+
+            <h2>Candidate B Votes: {candidate2}</h2>
+            <button className="btn2" onClick={() => setCandidate2(candidate2 + 1)}>
+                Vote B
+            </button>
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<VotingApp />);
+
+</script>
+
+</body>
+</html>
